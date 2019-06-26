@@ -10,20 +10,32 @@ class CharacterListView extends React.Component {
     this.props.getCharacterList();
   }
 
+  // render() {
+  //   console.log('views/CharacterListView.js: render')
+  //   if (this.props.isLoading === undefined || this.props.isLoading) {
+  //     return (
+  //       <div className="CharactersList_loading">
+  //         <h2>Loading...</h2>
+  //       </div>
+  //     )
+  //   }
+  //   return (
+  //     <div className="CharactersList_wrapper">
+  //       <CharacterList characters={this.props.characters} />
+  //     </div>
+  //   );
+  // }
   render() {
-    console.log('views/CharacterListView.js: render')
-    if (this.props.isLoading === undefined || this.props.isLoading) {
-      return (
-        <div className="CharactersList_loading">
-          <h2>Loading...</h2>
-        </div>
-      )
-    }
     return (
       <div className="CharactersList_wrapper">
-        <CharacterList characters={this.props.characters} />
+        {this.props.isLoading && (
+          <h2>Loading...</h2>
+        )}
+        {this.props.characters && (
+          <CharacterList characters={this.props.characters} />
+        )}
       </div>
-    );
+    )
   }
 }
 
@@ -35,7 +47,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {
-    getCharacterList
-  }
+  { getCharacterList }
 )(CharacterListView);
